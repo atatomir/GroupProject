@@ -61,6 +61,17 @@ class View {
     this.posY = posY;
   }
   
+  /* Find real coordiantes */
+  float getX(float x) {
+    if (parent == null) return posX + x;
+    return parent.getX(0) + posX + x;
+  }
+  
+  float getY(float y) {
+    if (parent == null) return posY + y;
+    return parent.getY(0) + posY + y;
+  }
+  
   /* Setup with translation included */
   void setupView() {
     pushMatrix();
@@ -90,6 +101,43 @@ class View {
       views[i].drawView();
       
     popMatrix();
+  }
+  
+  /* Forward mouse events */
+  void mousePressed() {
+     for (int i = 0; i < scount; i++)
+       views[i].mousePressed();
+  }
+  
+  void mouseReleased() {
+    for (int i = 0; i < scount; i++)
+       views[i].mouseReleased();
+  }
+  
+  void mouseMoved() {
+    for (int i = 0; i < scount; i++)
+       views[i].mouseMoved();
+  }
+  
+  void mouseDragged() {
+    for (int i = 0; i < scount; i++)
+       views[i].mouseDragged();
+  }
+  
+  boolean mouseInside() {
+     return getX(0) <= mouseX && mouseX <= getX(width) &&
+            getY(0) <= mouseY && mouseY <= getY(height);
+  }
+  
+  /* Forward keyboard events */
+  void keyPressed() {
+    for (int i = 0; i < scount; i++)
+       views[i].keyPressed();
+  }
+  
+  void keyReleased() {
+   for (int i = 0; i < scount; i++)
+       views[i].keyReleased(); 
   }
   
   /* Set backround to RGB color */

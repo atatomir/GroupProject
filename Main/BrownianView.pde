@@ -47,4 +47,8 @@ class BrownianView extends View {
       ay[i] = constrain(ay[i], 0, height);
     }
   }
+  
+  void mouseClicked() {
+    if (mouseInside()) setup();
+  }
 }

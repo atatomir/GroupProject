@@ -1,5 +1,5 @@
 class BallView extends View {
-  float x, y, dx, dy;
+  float x, y, dx, dy, ballColor = 255;
   float r = 10;
   
   BallView(float posX, float posY, float width, float height, float r, float speed) {
@@ -19,7 +19,7 @@ class BallView extends View {
     super.draw(); //<>//
     update();
     x += dx; y += dy;
-    fill(255, 0, 0);
+    fill(ballColor, 0, 0);
     ellipseMode(CENTER);
     ellipse(x, y, 2 * r, 2 * r);
   }
@@ -28,7 +28,6 @@ class BallView extends View {
     super.align();
     r = constrain(r, 0, width / 4);
     r = constrain(r, 0, height / 4);
-    r = max(r, min(width / 10, height / 10));
     
     x = constrain(x, r, width - r);
     y = constrain(y, r, height - r);
@@ -37,5 +36,10 @@ class BallView extends View {
   void update() {
     if (x - r < 0 || x + r > width) dx *= -1;
     if (y - r < 0 || y + r > height) dy *= -1;
+  }
+  
+  void mousePressed() {
+    super.mousePressed();
+    if (mouseInside()) ballColor = random(0, 256);
   }
 }

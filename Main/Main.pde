@@ -3,34 +3,37 @@
 /* The main window */
 View window = new StackView(0, 0, 500, 500, true);
 
-View ball1 = new BallView(0, 0, 250, 250, 15, 3);
-View ball2 = new BrownianView(250, 250, 250, 250);
 
+/* Setul initial window */
 void setup() {
   size(500, 500);
   
+  View ball1 = new BallView(0, 0, 250, 250, 15, 3);
+  View ball2 = new BrownianView(250, 250, 250, 250);
+
   // Add views to the window
   window.addSubview(ball1);
   window.addSubview(ball2);
-  
+
   window.setupView();
 }
 
+/* Draw window */
 void draw() {
   window.drawView();
 }
 
-void mouseClicked() {
-  View v;
-  if (window.scount % 2 == 0)
-    v = new BallView(0, 0, 0, 0, 20, 2);
-  else
-    v = new BrownianView(0, 0, 0, 0);
-    
-  window.addSubview(v);
-}
 
-void keyPressed() {
-  int x = (window.scount - 1) / 2;
-  window.views[x].kill();
-}
+/* Forward mouse events */
+void mousePressed() { window.mousePressed(); }
+
+void mouseReleased() { window.mouseReleased(); }
+
+void mouseMoved() { window.mouseMoved(); }
+
+void mouseDragged() { window.mouseDragged(); }
+
+/* Forward keyboard events */
+void keyPressed() { window.keyPressed(); }
+
+void keyReleased() { window.keyReleased(); }
