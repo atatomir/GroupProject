@@ -1,6 +1,7 @@
 class BallView extends View {
   float x, y, dx, dy, ballColor = 255;
   float r = 10;
+  char inside = ' ';
   
   BallView(float posX, float posY, float width, float height, float r, float speed) {
     super(posX, posY, width, height); 
@@ -11,17 +12,18 @@ class BallView extends View {
   
   void setup() {
     super.setup();
-    x = width / 2; //<>//
+    x = width / 2;
     y = height / 2;
   }
   
   void draw() {
-    super.draw(); //<>//
+    super.draw();
     update();
     x += dx; y += dy;
     fill(ballColor, 0, 0);
     ellipseMode(CENTER);
     ellipse(x, y, 2 * r, 2 * r);
+    drawText();
   }
   
   void align() {
@@ -38,8 +40,19 @@ class BallView extends View {
     if (y - r < 0 || y + r > height) dy *= -1;
   }
   
+  void drawText() {  
+    fill(255);
+    textSize(sizeToMatch("" + inside, 2.0 * r, 2.0 * r));
+    textAlign(CENTER);
+    text(inside, x, y + textDescent());
+  }
+  
   void mousePressed() {
     super.mousePressed();
-    if (mouseInside()) ballColor = random(0, 256);
+    if (mouseInside()) ballColor = int(random(0, 256));
+  }
+  
+  void keyPressed() {
+     inside = key;
   }
 }

@@ -1,9 +1,13 @@
 /* View: a drawing on screen following some patterns */
 class View {
   /* Own information */
-  float posX, posY, width, height;
   View parent = null;
+  color backgroundColor = color(255);
+  float posX, posY, width, height;
+  float viewWeight = 1.0;
   int viewId;
+  boolean hidden = false;
+  
   
   /* Subviews */
   int scount = 0;
@@ -61,6 +65,18 @@ class View {
     this.posY = posY;
   }
   
+  /* Change weight */
+  void changeWeight(float weight) {
+    viewWeight = weight; 
+    if (parent != null) parent.align();
+  }
+  
+  /* Set hidden */
+  void setHidden(boolean hidden) {
+    this.hidden = hidden;
+    if (parent != null) parent.align();
+  }
+  
   /* Find real coordiantes */
   float getX(float x) {
     if (parent == null) return posX + x;
@@ -90,6 +106,7 @@ class View {
   
   /* Draw with translation included */
   void drawView() {
+    if (hidden) return;
     pushMatrix();
     translate(posX, posY);
     
@@ -152,13 +169,19 @@ class View {
      rect(0, 0, width, height);
   }
   
+  /* Set background to some color */
+  void background(color c) {
+     fill(c);
+     rect(0, 0, width, height);
+  }
+  
   /* Default setup */
   void setup() {
-    background(255);
+    // nothing here
   }
   
   /* Default draw */
   void draw() {
-    background(255);
+    background(backgroundColor);
   }
 }

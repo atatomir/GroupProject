@@ -5,22 +5,36 @@ class StackView extends View {
     super(posX, posY, width, height); 
     this.splitX = splitX;
   }
- 
+  
+  float totalWeightOfSubviews() {
+    float aux = 0;
+    for (int i = 0; i < scount; i++)  
+      if (!views[i].hidden)
+        aux += views[i].viewWeight;
+    return aux;
+  }
   
   void align() {
+    float total = totalWeightOfSubviews();
+    float current = 0;
+    
     for (int i = 0; i < scount; i++) {
+      if (views[i].hidden) continue;
+      
       float newX, newY, newWidth, newHeight;
       if (splitX) {
-        newX = posX + (width / scount) * i;
+        newX = posX + (width / total) * current;
         newY = 0;
-        newWidth = width / scount;
+        newWidth = views[i].viewWeight * width / total;
         newHeight = height;
       } else {
         newX = 0;
-        newY = posY + (height / scount) * i;
+        newY = posY + (height / scount) * current;
         newWidth = width;
-        newHeight = height / scount;
+        newHeight = views[i].viewWeight * height / total;
       }
+      current += views[i].viewWeight;
+      
       views[i].resize(newWidth, newHeight);
       views[i].reposition(newX, newY);
       views[i].align();

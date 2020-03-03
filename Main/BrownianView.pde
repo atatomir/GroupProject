@@ -48,7 +48,7 @@ class BrownianView extends View {
     }
   }
   
-  void mouseClicked() {
+  void mousePressed() {
     if (mouseInside()) setup();
   }
 }
