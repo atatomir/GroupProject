@@ -29,7 +29,7 @@ class StackView extends View {
         newHeight = height;
       } else {
         newX = 0;
-        newY = posY + (height / scount) * current;
+        newY = posY + (height / total) * current;
         newWidth = width;
         newHeight = views[i].viewWeight * height / total;
       }
