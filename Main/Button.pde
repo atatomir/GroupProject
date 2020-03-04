@@ -13,6 +13,12 @@ class Button extends View {
     this.label = label;
   }
   
+  Button(Action action, String label) {
+    super();
+    this.action = action;
+    this.label = label;
+  }
+  
   void draw() {
     super.draw();
     

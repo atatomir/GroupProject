@@ -9,6 +9,10 @@ class BrownianView extends View {
     super(posX, posY, width, height); 
   }
   
+  BrownianView() {
+    super();
+  }
+  
   void setup() {
     for(int i = 0; i < num; i++) {
       ax[i] = width/2;

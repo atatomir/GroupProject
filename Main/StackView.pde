@@ -6,6 +6,11 @@ class StackView extends View {
     this.splitX = splitX;
   }
   
+  StackView(boolean splitX) {
+    super();
+    this.splitX = splitX;
+  }
+  
   float totalWeightOfSubviews() {
     float aux = 0;
     for (int i = 0; i < scount; i++)  

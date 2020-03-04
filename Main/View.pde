@@ -2,21 +2,30 @@
 class View {
   /* Own information */
   View parent = null;
-  color backgroundColor = color(255);
+  color backgroundColor = color(255, 0, 0, 0);
   float posX, posY, width, height;
   float viewWeight = 1.0;
   int viewId;
   boolean hidden = false;
+  boolean frozen = false;
   
   
   /* Subviews */
   int scount = 0;
    View[] views = new View[100];
+   
+  
   
   /* Create a new view */
   View(float posX, float posY, float width, float height) {
     resize(width, height);
     reposition(posX, posY);
+  }
+  
+  /* Create a new view */
+  View() {
+    resize(0, 0);
+    reposition(0, 0);
   }
   
   /* Align subviews */
@@ -77,6 +86,12 @@ class View {
     if (parent != null) parent.align();
   }
   
+  /* Set frozen */
+  void setFrozen(boolean frozen) {
+    this.frozen = frozen;
+    if (parent != null) parent.align();
+  }
+  
   /* Find real coordiantes */
   float getX(float x) {
     if (parent == null) return posX + x;
@@ -106,7 +121,7 @@ class View {
   
   /* Draw with translation included */
   void drawView() {
-    if (hidden) return;
+    if (hidden || frozen) return;
     pushMatrix();
     translate(posX, posY);
     
@@ -173,6 +188,16 @@ class View {
   void background(color c) {
      fill(c);
      rect(0, 0, width, height);
+  }
+  
+  /* Set default background of view */
+  void setBackground(color c) {
+    backgroundColor = c;
+  }
+  
+  /* Set transparent background */
+  void setTransparentBackground() {
+    setBackground(color(255, 0, 0, 0)); 
   }
   
   /* Default setup */

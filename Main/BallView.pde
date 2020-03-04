@@ -10,10 +10,18 @@ class BallView extends View {
     dy = 0.5 * speed;
   }
   
+  BallView(float r, float speed) {
+    super(); 
+    this.r = r;
+    dx = 2 * speed;
+    dy = 0.5 * speed;
+  }
+  
   void setup() {
     super.setup();
     x = width / 2;
     y = height / 2;
+    setBackground(color(200));
   }
   
   void draw() {
@@ -54,5 +62,6 @@ class BallView extends View {
   
   void keyPressed() {
      inside = key;
+     if (key == ' ') setFrozen(frozen ^ true);
   }
 }
