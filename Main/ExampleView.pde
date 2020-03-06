@@ -22,9 +22,14 @@ class ExampleView extends View {
     View button3 = new Button( new IncreaseWeightAction(ball2, -0.3), "Decrease Brownian");
     View button4 = new Button(new HideAction(ball1, ball2), "Change");
     
-    float[] dataX = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    float[] dataY = {0, 1, 3, 6, 10, 15, 21, 28, 36, 45};
-    View button5 = new Button(new CreateGraphPopupAction(this, 10, dataX, dataY), "See graph");
+    int cnt = 31;
+    float[] dataX = new float[cnt];
+    float[] dataY = new float[cnt];
+    for (int i = 0; i < cnt; i++) {
+      dataX[i] = i;
+      dataY[i] = (cnt / 2 - i) * (cnt / 2 - i);
+    }
+    View button5 = new Button(new CreateGraphPopupAction(this, cnt, dataX, dataY), "See graph");
 
     // Add views to the window
     this.addSubview(layers);

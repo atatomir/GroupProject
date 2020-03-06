@@ -33,6 +33,7 @@ class CreateGraphPopupAction extends Action {
   
   void apply() {
      GraphView graph = new GraphView(points, dataX, dataY, 1);
+     graph.setLabels("Height", "Bushiness", "Bushy?");
      PopupView popup = new PopupView(50, 50, parent.width - 100, parent.height - 100, graph);
      popup.setStroke(color(100, 0, 0));
      parent.addSubview(popup);

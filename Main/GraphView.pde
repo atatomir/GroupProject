@@ -116,6 +116,8 @@ class GraphView extends View {
   }
   
   void drawAxis() {    
+     int space = max(1, (points + 8) / 9);
+     
      line(x0, y0, x3, y0);
      line(x0, y0, x0, y3);
      textAlign(CENTER);
@@ -124,8 +126,9 @@ class GraphView extends View {
      textSize(sizeToMatch(labelX, x3 - x0, y0 * 0.8));
      transText(labelX, pointBetween(x0, x3, 0.5), y0 / 2, 0, 1, -1);
      
-     textSize(sizeToMatch(str(dataX[0]), (x2 - x1) / points, y0 / 2.5));
+     textSize(sizeToMatch(str(dataX[0]), (x2 - x1) / min(10, points), y0 / 2.5));
      for (int i = 0; i < points; i++) {
+       if (i % space != 0 && i + 1 != points) continue;
        transText(str(int(origX[i])), pointBetween(x1, x2, dataX[i]), y0 * 0.83, 0, 1, -1); 
      }
      
@@ -134,8 +137,9 @@ class GraphView extends View {
      textSize(sizeToMatch(labelY, y3 - y0, x0 * 0.8));
      transText(labelY, x0 / 2, pointBetween(y0, y3, 0.5), PI/2, 1, -1);
      
-     textSize(sizeToMatch(str(dataY[0]), (y2 - y1) / points, x0 / 2.5));
+     textSize(sizeToMatch(str(dataY[0]), (y2 - y1) / min(10, points), x0 / 2.5));
      for (int i = 0; i < points; i++) {
+       if (i % space != 0 && i + 1 != points) continue;
        transText(str(int(origY[i])), x0 * 0.83, pointBetween(y1, y2, dataY[i]), 0, 1, -1); 
      }
      
