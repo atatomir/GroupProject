@@ -73,6 +73,7 @@ class Snowflake {
    void draw() {
      fill(255);
      ellipseMode(CENTER);
+     //fill(random(0, 255), random(0, 255), random(0, 255));
      ellipse(x, y, r * 2, r * 2); 
    }
 }

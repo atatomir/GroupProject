@@ -3,6 +3,7 @@ class View {
   /* Own information */
   View parent = null;
   color backgroundColor = color(255, 0, 0, 0);
+  color strokeColor = color(0);
   float posX, posY, width, height;
   float viewWeight = 1.0;
   int viewId;
@@ -172,27 +173,21 @@ class View {
        views[i].keyReleased(); 
   }
   
-  /* Set backround to RGB color */
-  void background(float r, float g, float b) {
-     fill(r, g, b);
-     rect(0, 0, width, height);
-  }
-  
-  /* Set background to BW color */
-  void background(float w) {
-     fill(w);
-     rect(0, 0, width, height);
-  }
-  
   /* Set background to some color */
   void background(color c) {
      fill(c);
+     stroke(strokeColor);
      rect(0, 0, width, height);
   }
   
   /* Set default background of view */
   void setBackground(color c) {
     backgroundColor = c;
+  }
+  
+  /* Set default background of view */
+  void setStroke(color c) {
+    strokeColor = c;
   }
   
   /* Set transparent background */

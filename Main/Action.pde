@@ -6,6 +6,40 @@ class Action {
 }
 
 // some examples of action
+class KillViewAction extends Action {
+  View target;
+  
+  KillViewAction (PopupView view) {
+    target = view;
+  }
+  
+  void apply() {
+    target.kill();
+  }
+}
+
+class CreateGraphPopupAction extends Action {
+  View parent;
+  int points;
+  float[] dataX;
+  float[] dataY;
+  
+  CreateGraphPopupAction(View parent, int points, float[] dataX, float[] dataY) {
+    this.parent = parent;
+    this.points = points;
+    this.dataX = dataX;
+    this.dataY = dataY;
+  }
+  
+  void apply() {
+     GraphView graph = new GraphView(points, dataX, dataY, 1);
+     PopupView popup = new PopupView(50, 50, parent.width - 100, parent.height - 100, graph);
+     popup.setStroke(color(100, 0, 0));
+     parent.addSubview(popup);
+  }
+}
+
+
 class RestartViewAction extends Action {
   View target;
   
