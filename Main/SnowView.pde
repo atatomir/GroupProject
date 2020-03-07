@@ -19,6 +19,7 @@ class SnowView extends View {
   
   void setup() {
     super.setup();
+    setCatchMouse(false);
   }
   
   void draw() {

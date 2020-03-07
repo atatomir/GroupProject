@@ -40,6 +40,18 @@ class CreateGraphPopupAction extends Action {
   }
 }
 
+class ToggleButtonAction extends Action {
+  Button button;
+  
+  ToggleButtonAction(Button button) {
+    this.button = button;
+  }
+  
+  void apply() {
+     button.setEnable(button.enable ^ true);
+  }
+}
+
 
 class RestartViewAction extends Action {
   View target;

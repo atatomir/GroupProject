@@ -9,6 +9,7 @@ class View {
   int viewId;
   boolean hidden = false;
   boolean frozen = false;
+  boolean catchMouse = true;
   
   
   /* Subviews */
@@ -93,6 +94,11 @@ class View {
     if (parent != null) parent.align();
   }
   
+  /* Set catchMouse */
+  void setCatchMouse(boolean catchMouse) {
+    this.catchMouse = catchMouse;
+  }
+  
   /* Find real coordiantes */
   float getX(float x) {
     if (parent == null) return posX + x;
@@ -136,26 +142,55 @@ class View {
     popMatrix();
   }
   
-  /* Forward mouse events */
-  void mousePressed() {
-     for (int i = 0; i < scount; i++)
-       views[i].mousePressed();
+  /* Forward mouse events. Returns true if event caught */
+  boolean _mousePressed() {
+     if (!mouseInside()) return false;
+     
+     for (int i = scount - 1; i >= 0; i--)
+       if (views[i]._mousePressed())
+         return true;
+         
+     this.mousePressed();
+     return catchMouse;
   }
   
-  void mouseReleased() {
-    for (int i = 0; i < scount; i++)
-       views[i].mouseReleased();
+  boolean _mouseReleased() {
+     if (!mouseInside()) return false;
+     
+     for (int i = scount - 1; i >= 0; i--)
+       if (views[i]._mouseReleased())
+         return true;
+         
+     this.mouseReleased();
+     return catchMouse;
   }
   
-  void mouseMoved() {
-    for (int i = 0; i < scount; i++)
-       views[i].mouseMoved();
+  boolean _mouseMoved() {
+     if (!mouseInside()) return false;
+     
+     for (int i = scount - 1; i >= 0; i--)
+       if (views[i]._mouseMoved())
+         return true;
+         
+     this.mouseMoved();
+     return catchMouse;
   }
   
-  void mouseDragged() {
-    for (int i = 0; i < scount; i++)
-       views[i].mouseDragged();
+  boolean _mouseDragged() {
+     if (!mouseInside()) return false;
+     
+     for (int i = scount - 1; i >= 0; i--)
+       if (views[i]._mouseDragged())
+         return true;
+         
+     this.mouseDragged();
+     return catchMouse;
   }
+  
+  void mousePressed() {}
+  void mouseReleased() {}
+  void mouseMoved() {}
+  void mouseDragged() {}
   
   boolean mouseInside() {
      return getX(0) <= mouseX && mouseX <= getX(width) &&

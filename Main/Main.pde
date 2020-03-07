@@ -21,13 +21,13 @@ void draw() {
 
 
 /* Forward mouse events */
-void mousePressed() { window.mousePressed(); }
+void mousePressed() { window._mousePressed(); }
 
-void mouseReleased() { window.mouseReleased(); }
+void mouseReleased() { window._mouseReleased(); }
 
-void mouseMoved() { window.mouseMoved(); }
+void mouseMoved() { window._mouseMoved(); }
 
-void mouseDragged() { window.mouseDragged(); }
+void mouseDragged() { window._mouseDragged(); }
 
 /* Forward keyboard events */
 void keyPressed() { window.keyPressed(); }
