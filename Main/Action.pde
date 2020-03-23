@@ -3,9 +3,32 @@ class Action {
   void apply() {
     // I am an empty action
   }
+  
+  void apply(float x) {
+   // I am an empty float action
+  }
 }
 
 // some examples of action
+class BallSizeAction extends Action {
+  BallView ball;
+  
+  BallSizeAction(BallView ball) {
+    this.ball = ball; 
+  }
+  
+  void apply(float x) {
+    ball.r = 10 + 40 * x; 
+    ball.align();
+  }
+}
+
+class SayXAction extends Action {
+  void apply(float x) {
+    println(x); 
+  }
+}
+
 class KillViewAction extends Action {
   View target;
   

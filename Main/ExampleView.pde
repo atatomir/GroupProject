@@ -14,7 +14,7 @@ class ExampleView extends View {
     View layers = new LayerView(0, 0, width, height);
     View snow = new SnowView();
     View main = new StackView(true);
-    View ball1 = new BallView(30, 1.5);
+    BallView ball1 = new BallView(30, 1.5);
     View ball2 = new BrownianView();
     View menu = new StackView(false);
     View brownianMenu = new StackView(true);
@@ -33,6 +33,8 @@ class ExampleView extends View {
     }
     View button5 = new Button(new CreateGraphPopupAction(this, cnt, dataX, dataY), "See graph");
     Button button6 = new Button(new ToggleButtonAction(button), "Disable top button");
+    
+    Slider slider = new Slider(new BallSizeAction(ball1), 0.5);
 
     // Add views to the window
     this.addSubview(layers);
@@ -48,6 +50,7 @@ class ExampleView extends View {
     menu.addSubview(button4);
     menu.addSubview(button5);
     menu.addSubview(button6);
+    menu.addSubview(slider);
   }
   
 

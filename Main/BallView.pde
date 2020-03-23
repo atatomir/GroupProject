@@ -39,13 +39,13 @@ class BallView extends View {
     r = constrain(r, 0, width / 4);
     r = constrain(r, 0, height / 4);
     
-    x = constrain(x, r, width - r);
-    y = constrain(y, r, height - r);
+    x = constrain(x, r + eps, width - r - eps);
+    y = constrain(y, r + eps, height - r - eps);
   }
   
   void update() {
-    if (x - r < 0 || x + r > width) dx *= -1;
-    if (y - r < 0 || y + r > height) dy *= -1;
+    if (x - r < eps || x + r > width - eps) dx *= -1;
+    if (y - r < eps || y + r > height - eps) dy *= -1;
   }
   
   void drawText() {  

@@ -187,10 +187,32 @@ class View {
      return catchMouse;
   }
   
+  // Functions called only when event inside view and not caught
   void mousePressed() {}
   void mouseReleased() {}
   void mouseMoved() {}
   void mouseDragged() {}
+  
+  // Functions called anyway (user super.*)
+  void mousePressedAnywhere() {
+    for (int i = 0; i < scount; i++)
+      views[i].mousePressedAnywhere();
+  }
+  
+  void mouseReleasedAnywhere() {
+    for (int i = 0; i < scount; i++)
+      views[i].mouseReleasedAnywhere();
+  }
+  
+  void mouseDraggedAnywhere() {
+    for (int i = 0; i < scount; i++)
+      views[i].mouseDraggedAnywhere();
+  }
+  
+  void mouseMovedAnywhere() {
+    for (int i = 0; i < scount; i++)
+      views[i].mouseMovedAnywhere();
+  }
   
   boolean mouseInside() {
      return getX(0) <= mouseX && mouseX <= getX(width) &&
