@@ -82,7 +82,7 @@ class Button extends View {
 
   void mousePressed() {
     status = bDOWN;
-    if (action != null) action.apply();
+    if (action != null && enable) action.apply();
   }
   
   void mouseMoved() {
